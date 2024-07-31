@@ -5,25 +5,39 @@ from bleak import BleakScanner, BleakClient
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 
+class displayGUI(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
+
+        f = open()
+
+    def fire(self):
+        pass
+
+
+
 #### WHEN A FIRE IS DETECTED, THIS FILE WILL BE CALLED ON RASPBERRY PI ZERO W
-
-## 1. Enable Light on Attached RPI (Flashing Red)
-
-
-## 2. Push Warning to GUI
+class fireDetected():
+    def doWarn(self):
+        ## 1. Enable Light on Attached RPI (Flashing Red)
 
 
-## 3. If Internet enabled, send an email to an address
-import smtplib
-from email.message import EmailMessage
+        ## 2. Push Warning to GUI
+        displayGUI.fire()
 
-msg = EmailMessage()
-msg.set_content("The tempurature has been detected at XXXXXXXXX")
+        ## 3. If Internet enabled, send an email to an address
+        import smtplib
+        from email.message import EmailMessage
 
-msg['Subject'] = "Warning! A Potential Fire has been detected using CSI!!!"
-msg['From'] = "csiwarner@000800.xyz"
-msg['To'] = "z5488711@ad.unsw.edu.au"
+        msg = EmailMessage()
+        msg.set_content("The tempurature has been detected at XXXXXXXXX")
 
-s = smtplib.SMTP('localhost')
-s.send_message(msg)
-s.quit()
+        msg['Subject'] = "Warning! A Potential Fire has been detected using CSI!!!"
+        msg['From'] = "csiwarner@000800.xyz"
+        msg['To'] = "z5488711@ad.unsw.edu.au"
+
+        s = smtplib.SMTP('localhost')
+        s.send_message(msg)
+        s.quit()
